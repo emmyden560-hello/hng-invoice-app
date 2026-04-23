@@ -77,12 +77,35 @@ export default function InvoiceForm({ invoice, isOpen, onClose }) {
     const onSaveDraft = (data) => processSubmit(data, 'draft');
 
     return (
-        <div className={`fixed inset-0 z-40 flex justify-start transition-all duration-300 ease-in-out ${isOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible'}`}>
+        <div
+            className={`
+        fixed inset-0 z-40 flex justify-start
+        transition-all duration-300 ease-in-out
+        ${isOpen ? 'pointer-events-auto visible' : 'pointer-events-none invisible'}
+      `}
+        >
             <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} onClick={onClose} />
 
-            <div className={`relative w-full md:w-[719px] h-full bg-white dark:bg-dark-bg flex flex-col transform transition-transform duration-300 ease-in-out top-[72px] h-[calc(100vh-72px)] md:top-0 md:h-full md:pl-[103px] rounded-r-[20px] ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+            {/* THE DRAWER */}
+            <div
+                className={`
+          relative w-full md:w-[616px] lg:w-[719px] h-full bg-white dark:bg-dark-bg flex flex-col
+          transform transition-transform duration-300 ease-in-out
+          
+          /* MOBILE: Below 72px Header */
+          top-[72px] h-[calc(100vh-72px)] 
+          
+          /* TABLET: Below 80px Header, Rounded Bottom-Right */
+          md:top-[80px] md:h-[calc(100vh-80px)] md:rounded-r-[20px]
+          
+          /* DESKTOP: Top 0 (Sidebar is on left), Left Padding */
+          lg:top-0 lg:h-full lg:pl-[103px] lg:rounded-r-[20px]
 
-                <div className="px-6 py-6 md:pl-14 pt-8 md:pt-14">
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+            >
+
+                <div className="px-6 py-6 md:px-14 md:pt-14 md:pb-6">
                     <h2 className="text-heading-m font-bold text-text-primary dark:text-white">
                         {invoice ? `Edit #${invoice.id}` : 'New Invoice'}
                     </h2>

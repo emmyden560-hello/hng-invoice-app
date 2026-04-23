@@ -4,20 +4,22 @@ export default function MainLayout({ children }) {
     return (
         <div className="min-h-screen bg-light-bg dark:bg-dark-bg transition-colors duration-300 font-spartan">
 
-            {/* The Fixed Navigation (Top on Mobile, Left on Desktop) */}
             <Sidebar />
 
-            {/* The Content Container */}
             <main className="
-        relative
-        /* MOBILE: Push content down below the 72px header */
+        relative flex justify-center
+        
+        /* MOBILE: Push down 72px */
         pt-[104px] px-6 pb-24
-        /* DESKTOP: Push content right of the 103px sidebar, center it */
-        lg:pl-[103px] lg:pt-16 lg:px-0
-        flex justify-center
+        
+        /* TABLET: Push down 80px (Header grows) */
+        md:pt-[130px] md:px-12 md:pb-10
+        
+        /* DESKTOP: Push right 103px, Reset Top Padding */
+        lg:pl-[103px] lg:pt-[72px] lg:px-0
       ">
 
-                {/* Max Width Constraint (730px is standard for this design) */}
+                {/* Constraint Container */}
                 <div className="w-full max-w-[730px]">
                     {children}
                 </div>

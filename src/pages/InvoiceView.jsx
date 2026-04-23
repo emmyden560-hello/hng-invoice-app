@@ -81,17 +81,18 @@ export default function InvoiceView() {
             </div>
 
             {/* --- 3. Details Card --- */}
-            <div className="bg-white dark:bg-dark-card rounded-lg shadow-sm p-8 md:p-12 text-body-1 text-text-secondary dark:text-white/75">
+            <div className="bg-white dark:bg-dark-card rounded-lg shadow-sm p-6 md:p-8 text-body-1 text-text-secondary dark:text-white/75 mb-24 md:mb-0">
 
-                {/* Top Row: ID & Sender Address */}
-                <div className="flex flex-col md:flex-row justify-between mb-12">
-                    <div className="mb-8 md:mb-0">
-                        <h1 className="text-heading-s md:text-heading-m font-bold text-text-primary dark:text-white mb-2">
-                            <span className="text-text-tertiary">#</span>{invoice.id}
-                        </h1>
+                {/* ID & Description + Sender Address */}
+                <div className="flex flex-col md:flex-row justify-between mb-8 gap-8">
+                    <div>
+                        <h3 className="text-heading-s font-bold text-text-primary dark:text-white mb-2">
+                            <span className="text-[#888EB0]">#</span>{invoice.id}
+                        </h3>
                         <p>{invoice.description}</p>
                     </div>
-                    <div className="text-right flex flex-col md:items-end">
+
+                    <div className="md:text-right leading-loose">
                         <p>{invoice.senderAddress.street}</p>
                         <p>{invoice.senderAddress.city}</p>
                         <p>{invoice.senderAddress.postCode}</p>
@@ -99,10 +100,10 @@ export default function InvoiceView() {
                     </div>
                 </div>
 
-                {/* Middle Grid: Dates & Bill To */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+                {/* Client Details Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-8 mb-10">
 
-                    {/* Column 1: Dates */}
+                    {/* Col 1: Dates */}
                     <div className="flex flex-col gap-8">
                         <div>
                             <p className="mb-3">Invoice Date</p>
@@ -118,25 +119,28 @@ export default function InvoiceView() {
                         </div>
                     </div>
 
-                    {/* Column 2: Bill To */}
+                    {/* Col 2: Bill To */}
                     <div>
                         <p className="mb-3">Bill To</p>
-                        <h3 className="text-heading-s font-bold text-text-primary dark:text-white mb-2">
+                        <h3 className="text-heading-s font-bold text-text-primary dark:text-white mb-2 break-words">
                             {invoice.clientName}
                         </h3>
-                        <p>{invoice.clientAddress.street}</p>
-                        <p>{invoice.clientAddress.city}</p>
-                        <p>{invoice.clientAddress.postCode}</p>
-                        <p>{invoice.clientAddress.country}</p>
+                        <div className="leading-loose break-words">
+                            <p>{invoice.clientAddress.street}</p>
+                            <p>{invoice.clientAddress.city}</p>
+                            <p>{invoice.clientAddress.postCode}</p>
+                            <p>{invoice.clientAddress.country}</p>
+                        </div>
                     </div>
 
-                    {/* Column 3: Sent To */}
+                    {/* Col 3: Sent To (Email) */}
                     <div className="col-span-2 md:col-span-1">
                         <p className="mb-3">Sent to</p>
-                        <h3 className="text-heading-s font-bold text-text-primary dark:text-white">
+                        <h3 className="text-heading-s font-bold text-text-primary dark:text-white break-all">
                             {invoice.clientEmail}
                         </h3>
                     </div>
+
                 </div>
 
                 {/* Bottom: Items Table */}
