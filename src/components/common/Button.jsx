@@ -1,57 +1,26 @@
 import PropTypes from 'prop-types';
 
-// Map variants to Tailwind classes
 const VARIANTS = {
-    // Button 1 & 2: Primary Purple
-    primary: "bg-primary hover:bg-primary-hover text-white",
-
-    // Button 5: Destructive Red
-    danger: "bg-danger hover:bg-danger-hover text-white",
-
-    // Button 3: Edit (Theme Adaptive)
-    // Light: Light Grey bg, Dark Text
-    // Dark: Dark Blue bg, White Text
-    secondary: `
-    bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] hover:text-[#7E88C3]
-    dark:bg-dark-input dark:text-white dark:hover:bg-white dark:hover:text-[#7E88C3]
-  `,
-
-    // Button 4: Save as Draft (Dark Slate)
-    draft: "bg-draft hover:bg-draft-hover text-draft-text dark:text-white",
-
-    // Button 6: Add New Item (Full width, dashed or solid)
-    item: "w-full bg-[#F9FAFE] text-[#7E88C3] hover:text-primary dark:bg-dark-input dark:text-white dark:hover:text-text-secondary",
-
-    // Button 7: Mark as Draft (Light Grey bg, Dark Text)
-    dark: "bg-[#373B53] text-gray-200 hover:bg-[#0C0E16] dark:bg-[#373B53] dark:text-gray-200 dark:hover:bg-[#1E2139]"
-
+    primary: "bg-primary text-white hover:bg-[#9277FF]", // Purple -> Light Purple
+    secondary: "bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] dark:bg-[#252945] dark:text-white dark:hover:bg-white dark:hover:text-[#7E88C3]", // Complex Dark Mode Hover
+    danger: "bg-danger text-white hover:bg-[#FF9797]", // Red -> Pinkish Red
+    dark: "bg-[#373B53] text-[#DFE3FA] hover:bg-[#0C0E16] dark:bg-[#373B53] dark:text-[#DFE3FA] dark:hover:bg-[#1E2139]", // Draft Button
+    item: "bg-[#F9FAFE] text-[#7E88C3] hover:bg-[#DFE3FA] w-full dark:bg-[#252945] dark:text-white dark:hover:bg-white dark:hover:text-[#7E88C3]" // Add New Item Button
 };
 
-export default function Button({
-    children,
-    variant = 'primary',
-    icon,
-    className = '',
-    ...props
-}) {
+export default function Button({ children, variant = 'primary', onClick, className = '', icon, type = "button" }) {
     return (
         <button
-            // Base styles: 
-            // - heading-s (15px Bold)
-            // - Rounded corners (rounded-3xl for pills)
-            // - Flex layout for centering icon + text
-            // - Transition for smooth hover effects
+            type={type}
+            onClick={onClick}
             className={`
-        flex items-center justify-center gap-4 px-6 py-4 rounded-3xl 
-        text-heading-s transition-colors duration-200 font-bold
+        flex items-center justify-center gap-4 px-6 py-4 rounded-full 
+        font-bold text-heading-s-variant transition-colors duration-200 
         ${VARIANTS[variant]} 
         ${className}
       `}
-            {...props}
         >
-            {/* Render Icon if present (useful for the "+" in 'New Invoice') */}
-            {icon && <span className="mt-[-2px]">{icon}</span>}
-
+            {icon && <span>{icon}</span>}
             {children}
         </button>
     );
@@ -59,7 +28,9 @@ export default function Button({
 
 Button.propTypes = {
     children: PropTypes.node.isRequired,
-    variant: PropTypes.oneOf(['primary', 'danger', 'secondary', 'draft', 'item']),
-    icon: PropTypes.node,
+    variant: PropTypes.oneOf(['primary', 'secondary', 'danger', 'dark', 'item']),
+    onClick: PropTypes.func,
     className: PropTypes.string,
+    icon: PropTypes.node,
+    type: PropTypes.string,
 };

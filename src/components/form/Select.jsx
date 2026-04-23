@@ -6,7 +6,7 @@ export default function Select({ label, value, options, onChange }) {
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef(null);
 
-    // Close dropdown if clicking outside
+    // Close when clicking outside
     useEffect(() => {
         function handleClickOutside(event) {
             if (containerRef.current && !containerRef.current.contains(event.target)) {
@@ -17,66 +17,63 @@ export default function Select({ label, value, options, onChange }) {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    // Find the label for the current value (e.g., value "30" -> "Net 30 Days")
     const selectedLabel = options.find(opt => opt.value === value)?.label || value;
 
     return (
         <div className="flex flex-col gap-2 relative" ref={containerRef}>
-            {label && <label className="text-body-1 text-text-secondary">{label}</label>}
+            <label className="text-body-1 font-medium text-text-secondary dark:text-[#DFE3FA]">
+                {label}
+            </label>
 
-            {/* Trigger Button */}
-            <button
-                type="button"
-                onClick={() => setIsOpen(!isOpen)}
+            {/* --- TRIGGER BUTTON --- */}
+            <div
                 className={`
-          w-full px-5 py-4 rounded flex justify-between items-center
-          text-heading-s-variant font-bold
-          bg-white dark:bg-dark-input
-          text-text-primary dark:text-white
-          border 
-          ${isOpen ? 'border-primary' : 'border-light-hover dark:border-dark-input'}
-          focus:outline-none
-          transition-colors duration-200
+          w-full px-5 py-4 rounded text-heading-s-variant font-bold 
+          bg-white dark:bg-dark-input border border-light-border dark:border-dark-input
+          flex justify-between items-center cursor-pointer
+          hover:border-primary transition-colors duration-200
+          ${isOpen ? 'border-primary' : ''}
         `}
+                onClick={() => setIsOpen(!isOpen)}
             >
-                {selectedLabel}
-                <HiChevronDown className="text-primary font-bold text-lg" />
-            </button>
+                <span className="text-text-primary dark:text-white">{selectedLabel}</span>
+                <HiChevronDown className={`text-primary font-bold transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+            </div>
 
-            {/* Dropdown Menu */}
-            {isOpen && (
-                <div className="absolute top-[85px] w-full z-50 rounded-lg shadow-xl overflow-hidden bg-white dark:bg-dark-input">
-                    {options.map((option, index) => (
-                        <div
-                            key={option.value}
-                            onClick={() => {
-                                onChange(option.value);
-                                setIsOpen(false);
-                            }}
-                            className={`
-                px-6 py-4 cursor-pointer
-                text-heading-s-variant font-bold
-                text-text-primary dark:text-text-secondary
-                hover:text-primary dark:hover:text-white
-                border-b border-light-hover dark:border-dark-card last:border-0
-                transition-colors duration-200
-              `}
-                        >
-                            {option.label}
-                        </div>
-                    ))}
-                </div>
-            )}
+            {/* --- DROPDOWN LIST --- */}
+            <div className={`
+        absolute top-[85px] left-0 w-full z-20
+        bg-white dark:bg-dark-dropdown shadow-xl rounded-lg overflow-hidden
+        transition-all duration-200 origin-top
+        ${isOpen ? 'opacity-100 scale-y-100 visible' : 'opacity-0 scale-y-0 invisible'}
+      `}>
+                {options.map((option, index) => (
+                    <div
+                        key={option.value}
+                        onClick={() => {
+                            onChange(option.value);
+                            setIsOpen(false);
+                        }}
+                        className={`
+              px-6 py-4 cursor-pointer text-heading-s-variant font-bold
+              border-light-border dark:border-[#1E2139] last:border-0
+              text-text-primary dark:text-white
+              
+              /* HOVER EFFECT: Text turns Purple */
+              hover:text-primary dark:hover:text-[#9277FF] transition-colors
+            `}
+                    >
+                        {option.label}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
 
 Select.propTypes = {
     label: PropTypes.string,
-    value: PropTypes.any,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    options: PropTypes.arrayOf(PropTypes.object).isRequired,
     onChange: PropTypes.func.isRequired,
-    options: PropTypes.arrayOf(PropTypes.shape({
-        label: PropTypes.string,
-        value: PropTypes.any
-    })).isRequired,
 };

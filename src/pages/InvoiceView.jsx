@@ -63,22 +63,19 @@ export default function InvoiceView() {
             </Link>
 
             {/* --- 2. Header (Status & Actions) --- */}
-            <div className="bg-white dark:bg-dark-card rounded-lg shadow-sm p-6 mb-6 flex justify-between items-center">
 
-                {/* Left: Status Label */}
+            <div className="bg-white dark:bg-dark-card rounded-lg shadow-sm p-6 mb-6 flex justify-between items-center">
                 <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
-                    <span className="text-body-1 text-text-secondary">Status</span>
+                    <span className="text-body-1 text-text-secondary dark:text-[#DFE3FA]">Status</span>
                     <InvoiceStatus status={invoice.status} />
                 </div>
 
-                {/* Right: Actions (Desktop Only - Mobile usually moves this to bottom, but we'll keep simple for now) */}
+                {/* Desktop Actions (Hidden on Mobile) */}
                 <div className="hidden md:flex gap-2">
                     <Button variant="secondary" onClick={() => setIsEditOpen(true)}>Edit</Button>
                     <Button variant="danger" onClick={() => setIsDeleteModalOpen(true)}>Delete</Button>
                     {invoice.status === 'pending' && (
-                        <Button variant="primary" onClick={() => markAsPaid(invoice.id)}>
-                            Mark as Paid
-                        </Button>
+                        <Button variant="primary" onClick={() => markAsPaid(invoice.id)}>Mark as Paid</Button>
                     )}
                 </div>
             </div>
@@ -177,6 +174,20 @@ export default function InvoiceView() {
                         <span className="text-body-2">Amount Due</span>
                         <span className="text-heading-m font-bold">{formatCurrency(invoice.total)}</span>
                     </div>
+                </div>
+
+                {/* --- 3. MOBILE BOTTOM ACTION BAR (New!) --- */}
+                <div className="
+        md:hidden fixed bottom-0 left-0 w-full 
+        bg-white dark:bg-dark-card p-6 
+        flex justify-center gap-2 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]
+        z-30
+      ">
+                    <Button variant="secondary" onClick={() => setIsEditOpen(true)}>Edit</Button>
+                    <Button variant="danger" onClick={() => setIsDeleteModalOpen(true)}>Delete</Button>
+                    {invoice.status === 'pending' && (
+                        <Button variant="primary" onClick={() => markAsPaid(invoice.id)}>Mark as Paid</Button>
+                    )}
                 </div>
 
             </div>

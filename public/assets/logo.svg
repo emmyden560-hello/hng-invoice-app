@@ -1,5 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="28" height="26" viewBox="0 0 28 26" fill="none">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.508 5.31432L14 0L7.49197 5.31432L0 11.4286V26H28V11.4286L20.508 5.31432Z" fill="#7C5DFA"/>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M14 0L14 13L28 11.4286L20.508 5.31432L14 0Z" fill="#9277FF"/>
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M14 26V13L0 11.4286L7.49197 5.31432L14 26Z" fillOpacity="0.5" fill="white"/>
+<svg width="103" height="103" viewBox="0 0 103 103" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 1. Base Layer: Solid Dark Purple (No Gaps Possible) -->
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M20 0H83C94.0457 0 103 8.95431 103 20V83C103 94.0457 94.0457 103 83 103H20C8.95431 103 0 94.0457 0 83V20C0 8.95431 8.95431 0 20 0Z" fill="#7C5DFA"/>
+  
+  <!-- 2. Overlay Layer: Light Purple Curve -->
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 51.5C0 51.5 25 70 51.5 70C78 70 103 51.5 103 51.5V83C103 94.0457 94.0457 103 83 103H20C8.9543 103 0 94.0457 0 83V51.5Z" fill="#9277FF"/>
+  
+  <!-- 3. Icon Layer: Pure White (No Stroke) -->
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M51.5 23C35.76 23 23 35.76 23 51.5C23 67.24 35.76 80 51.5 80C67.24 80 80 67.24 80 51.5C80 35.76 67.24 23 51.5 23ZM51.5 51.5L32 32C37 27 44 24 51.5 24C59 24 66 27 71 32L51.5 51.5Z" fill="white"/>
 </svg>

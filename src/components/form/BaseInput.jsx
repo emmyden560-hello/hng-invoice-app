@@ -1,35 +1,28 @@
 import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
-const BaseInput = forwardRef(({ label, error, className = "", ...props }, ref) => {
+const BaseInput = forwardRef(({ label, error, className = '', ...props }, ref) => {
     return (
         <div className={`flex flex-col gap-2 ${className}`}>
-            {/* 1. Label: Body 1 / Text Secondary */}
-            {label && (
-                <label className="text-body-1 text-text-secondary flex justify-between">
+            <div className="flex justify-between">
+                <label className={`text-body-1 font-medium ${error ? 'text-danger' : 'text-text-secondary dark:text-[#DFE3FA]'}`}>
                     {label}
-                    {/* Optional: Render error text inside label row if you want compact layout */}
-                    {error && <span className="text-danger text-[10px] font-bold">{error}</span>}
                 </label>
-            )}
+                {error && <span className="text-xs font-semibold text-danger">can&apos;t be empty</span>}
+            </div>
 
-            {/* 2. Input Field */}
             <input
                 ref={ref}
                 className={`
-          w-full px-5 py-4 rounded
-          text-heading-s-variant font-bold
-          bg-white dark:bg-dark-input
+          w-full px-5 py-4 rounded text-heading-s-variant font-bold 
+          bg-white dark:bg-dark-input border 
+          outline-none transition-colors duration-200
           text-text-primary dark:text-white
-          border border-light-hover dark:border-dark-input
           
-          /* Focus State: The "Active" purple border from design */
-          focus:outline-none focus:border-primary
-          
-          /* Error State: Red border */
-          ${error ? 'border-danger' : ''}
-          
-          transition-colors duration-200
+          /* --- THE HOVER & FOCUS LOGIC --- */
+          ${error
+                        ? 'border-danger'
+                        : 'border-light-border dark:border-dark-input hover:border-primary focus:border-primary'}
         `}
                 {...props}
             />
@@ -38,9 +31,10 @@ const BaseInput = forwardRef(({ label, error, className = "", ...props }, ref) =
 });
 
 BaseInput.displayName = 'BaseInput';
+
 BaseInput.propTypes = {
     label: PropTypes.string,
-    error: PropTypes.string,
+    error: PropTypes.object,
     className: PropTypes.string,
 };
 
