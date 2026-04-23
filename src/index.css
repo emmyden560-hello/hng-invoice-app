@@ -1,1 +1,79 @@
 @import "tailwindcss";
+
+@theme {
+  /* Font Family */
+  --font-sans: "League Spartan", sans-serif;
+
+  /* Colors - Primary */
+  --color-primary: #7C5DFA;
+  --color-primary-hover: #9277FF;
+
+  /* Colors - Danger */
+  --color-danger: #EC5757;
+  --color-danger-hover: #FF9797;
+
+  /* Colors - Dark Mode */
+  --color-dark-bg: #141625;
+  --color-dark-card: #1E2139;
+  --color-dark-input: #252945;
+  --color-dark-black: #0C0E16;
+
+  /* Colors - Light Mode */
+  --color-light-bg: #F8F8FB;
+  --color-light-card: #FFFFFF;
+  --color-light-hover: #DFE3FA;
+
+  /* Colors - Text */
+  --color-text-primary: #0C0E16;
+  --color-text-secondary: #888EB0;
+  --color-text-tertiary: #7E88C3;
+
+  /* Colors - Draft */
+  --color-draft: #373B53;
+  --color-draft-hover: #0C0E16;
+  --color-draft-text: #DFE3FA;
+
+  /* Colors - Neutral */
+  --color-neutral-light: #F9FAFE;
+  --color-neutral-dark: #252945;
+
+  /* Colors - Status */
+  --color-status-paid: #33D69F;
+  --color-status-pending: #FF8F00;
+  --color-status-draft: #373B53;
+  --color-status-draft-dark: #DFE3FA;
+
+  /* Font Sizes */
+  --text-heading-l: 36px;
+  --text-heading-l--line-height: 33px;
+  --text-heading-l--letter-spacing: -1px;
+  --text-heading-l--font-weight: 700;
+
+  --text-heading-m: 24px;
+  --text-heading-m--line-height: 22px;
+  --text-heading-m--letter-spacing: -0.75px;
+  --text-heading-m--font-weight: 700;
+
+  --text-heading-s: 15px;
+  --text-heading-s--line-height: 24px;
+  --text-heading-s--letter-spacing: -0.25px;
+  --text-heading-s--font-weight: 700;
+
+  --text-heading-s-variant: 15px;
+  --text-heading-s-variant--line-height: 15px;
+  --text-heading-s-variant--letter-spacing: -0.25px;
+  --text-heading-s-variant--font-weight: 700;
+
+  --text-body-1: 13px;
+  --text-body-1--line-height: 18px;
+  --text-body-1--letter-spacing: -0.1px;
+  --text-body-1--font-weight: 500;
+
+  --text-body-2: 13px;
+  --text-body-2--line-height: 15px;
+  --text-body-2--letter-spacing: -0.25px;
+  --text-body-2--font-weight: 500;
+}
+
+/* Dark mode via class */
+@custom-variant dark (&:where(.dark, .dark *));
