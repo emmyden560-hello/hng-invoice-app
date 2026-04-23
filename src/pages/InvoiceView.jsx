@@ -81,7 +81,7 @@ export default function InvoiceView() {
             </div>
 
             {/* --- 3. Details Card --- */}
-            <div className="bg-white dark:bg-dark-card rounded-lg shadow-sm p-6 md:p-8 text-body-1 text-text-secondary dark:text-white/75 mb-24 md:mb-0">
+            <div className="bg-white dark:bg-dark-card rounded-lg shadow-sm p-6 md:p-8 text-body-1 text-text-secondary dark:text-white/75 mb-28 md:mb-0">
 
                 {/* ID & Description + Sender Address */}
                 <div className="flex flex-col md:flex-row justify-between mb-8 gap-8">
@@ -180,20 +180,21 @@ export default function InvoiceView() {
                     </div>
                 </div>
 
-                {/* --- 3. MOBILE BOTTOM ACTION BAR (New!) --- */}
-                <div className="
+
+            </div>
+
+            {/* --- MOBILE BOTTOM ACTION BAR --- */}
+            <div className="
         md:hidden fixed bottom-0 left-0 w-full 
         bg-white dark:bg-dark-card p-6 
         flex justify-center gap-2 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]
-        z-30
+        z-50
       ">
-                    <Button variant="secondary" onClick={() => setIsEditOpen(true)}>Edit</Button>
-                    <Button variant="danger" onClick={() => setIsDeleteModalOpen(true)}>Delete</Button>
-                    {invoice.status === 'pending' && (
-                        <Button variant="primary" onClick={() => markAsPaid(invoice.id)}>Mark as Paid</Button>
-                    )}
-                </div>
-
+                <Button variant="secondary" onClick={() => setIsEditOpen(true)}>Edit</Button>
+                <Button variant="danger" onClick={() => setIsDeleteModalOpen(true)}>Delete</Button>
+                {invoice.status === 'pending' && (
+                    <Button variant="primary" onClick={() => markAsPaid(invoice.id)}>Mark as Paid</Button>
+                )}
             </div>
         </div>
     );

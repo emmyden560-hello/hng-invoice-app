@@ -24,7 +24,7 @@ export default function Sidebar() {
         bg-primary rounded-r-[20px] 
         relative flex items-center justify-center overflow-hidden group cursor-pointer
       ">
-                <img src={logo} alt="Logo" className="w-7 h-7 lg:w-10 lg:h-10 relative z-10" />
+                <img src={logo} alt="Logo" className="w-20 h-20 lg:w-25 lg:h-25 relative z-10" />
                 <div className="absolute top-1/2 left-0 w-full h-full bg-[#9277FF] rounded-tl-[20px] opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
 

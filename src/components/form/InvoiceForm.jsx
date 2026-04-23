@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useForm, useFieldArray, Controller } from 'react-hook-form';
-import { HiTrash } from 'react-icons/hi2';
+import { HiTrash, HiChevronLeft } from 'react-icons/hi2';
 import { useInvoices } from '../../context/InvoiceContext';
 import Button from '../common/Button';
 import BaseInput from './BaseInput';
@@ -89,23 +89,33 @@ export default function InvoiceForm({ invoice, isOpen, onClose }) {
             {/* THE DRAWER */}
             <div
                 className={`
-          relative w-full md:w-[616px] lg:w-[719px] h-full bg-white dark:bg-dark-bg flex flex-col
+          relative w-full md:w-[616px] lg:w-[719px] bg-white dark:bg-dark-bg flex flex-col
           transform transition-transform duration-300 ease-in-out
           
           /* MOBILE: Below 72px Header */
-          top-[72px] h-[calc(100vh-72px)] 
+          top-[72px] h-[calc(100vh-72px)]
           
           /* TABLET: Below 80px Header, Rounded Bottom-Right */
           md:top-[80px] md:h-[calc(100vh-80px)] md:rounded-r-[20px]
           
           /* DESKTOP: Top 0 (Sidebar is on left), Left Padding */
-          lg:top-0 lg:h-full lg:pl-[103px] lg:rounded-r-[20px]
+          lg:top-0 lg:h-screen lg:pl-[103px] lg:rounded-r-[20px]
 
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         `}
             >
 
-                <div className="px-6 py-6 md:px-14 md:pt-14 md:pb-6">
+                <div className="px-6 pt-6 pb-4 md:px-14 md:pt-14 md:pb-6 flex flex-col gap-6">
+                    {/* Mobile-only Go back button */}
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="md:hidden inline-flex items-center gap-6 text-heading-s-variant font-bold text-text-primary dark:text-white hover:text-text-secondary transition-colors self-start"
+                        aria-label="Go back"
+                    >
+                        <HiChevronLeft className="text-primary" />
+                        Go back
+                    </button>
                     <h2 className="text-heading-m font-bold text-text-primary dark:text-white">
                         {invoice ? `Edit #${invoice.id}` : 'New Invoice'}
                     </h2>
@@ -191,7 +201,7 @@ export default function InvoiceForm({ invoice, isOpen, onClose }) {
                     </div>
                 </form>
 
-                <div className="p-6 md:px-14 flex items-center bg-white dark:bg-dark-bg shadow-[0_-10px_30px_rgba(0,0,0,0.1)] rounded-br-[20px]">
+                <div className="flex-shrink-0 p-6 md:px-14 flex items-center bg-white dark:bg-dark-bg shadow-[0_-10px_30px_rgba(0,0,0,0.1)] md:rounded-br-[20px]">
                     {invoice ? (
                         <div className="flex w-full justify-end gap-2">
                             <Button variant="secondary" onClick={onClose}>Cancel</Button>
